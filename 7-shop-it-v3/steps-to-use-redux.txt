@@ -1,0 +1,30 @@
+
+
+
+steps to use redux lib for state management
+---------------------------------------------
+
+
+step-1 : know UI application state
+            - products
+            - reviews
+            - cart
+            ...
+step-2 : know the actions which cause state change
+         - LOAD_PRODUCTS
+         - LOAD_REVIEWS
+         - ADD_NEW_REVIEW
+         - ADD_TO_CART
+         - REMOVE_CART
+step-3 : create / define action creators ( function which create action object )
+step-4 : create / define reducer(s) to process action with current state
+            - productsReducer
+            - cartReducer
+step-5 : combine all reducer(s) as one root-reducer
+step-6 : create one store with root-reducer ( with initial state )
+
+----------------------------------------------------------------
+
+
+
+

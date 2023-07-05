@@ -2,10 +2,15 @@ import {useState} from "react";
 import Navbar from "./components/Navbar";
 import ProductList from "./components/ProductList";
 import CartBadge from "./components/CartBadge";
+import CartView from "./components/CartView";
 
 function App() {
 
     const [cart,setCart]=useState([])
+
+    const handleBuy=(item)=>{
+        setCart([item,...cart])
+    }
 
     return (
         <div className="container">
@@ -13,7 +18,9 @@ function App() {
             <hr/>
             <CartBadge cartCount={cart.length}/>
             <hr/>
-            <ProductList onBuy={item=>setCart([item,...cart])}/>
+            <CartView cart={cart}/>
+            <hr/>
+            <ProductList onBuy={handleBuy}/>
         </div>
     );
 }

@@ -1,12 +1,22 @@
 import {useState} from "react";
 import Review from "./Review";
+import ReviewForm from "./ReviewForm";
 
 function Product({product,onBuy}){
     const [currentTab, setCurrentTab] = useState(1);
+    // state
     const [reviews,setReviews] = useState([
-        {author: "John Doe", rating: 4, review: "This is a very good review"},
-        {author: "John Doe", rating: 1, review: "This is a very bad review"}
+        {author: "John Doe", rating: 4, body: "This is a very good review"},
+        {author: "John Doe", rating: 1, body: "This is a very bad review"}
     ]);
+
+    const handleNewReview = (review) => {
+        //..
+        setReviews([review,...reviews]); // state change logic
+    }
+    const handleBuy=()=>{
+        onBuy(product)
+    }
     const renderReviews = () => {
         return reviews.map((review, index) => {
             return (<Review key={index} review={review}/>);
@@ -24,7 +34,10 @@ function Product({product,onBuy}){
                 )
             case 3:
                 return (
-                    <div>{renderReviews()}</div>
+                    <div>
+                        <ReviewForm onSubmit={handleNewReview}/>
+                        {renderReviews()}
+                    </div>
                 )
             default:
                 return
@@ -41,27 +54,30 @@ function Product({product,onBuy}){
                         <div className={"col-8"}>
                             <div>{product.name}</div>
                             <div>&#8377;{product.price}</div>
-                            <button onClick={e=>onBuy(product)} className={"btn btn-primary"}>Buy</button>
+                            <button onClick={handleBuy} className={"btn btn-primary"}>Buy</button>
                             <br/>
                             <ul className="nav nav-tabs">
                                 <li className="nav-item">
                                     <a className={`nav-link ${currentTab === 1? "active" : ""}`}
                                        onClick={e => setCurrentTab(1)}
-                                       href="#">
+                                    style={{cursor: "pointer"}}
+                                    >
                                         Description
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className={`nav-link ${currentTab === 2? "active" : ""}`}
                                        onClick={e => setCurrentTab(2)}
-                                       href="#">
+                                       style={{cursor: "pointer"}}
+                                       >
                                         Specification
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className={`nav-link ${currentTab === 3? "active" : ""}`}
                                        onClick={e => setCurrentTab(3)}
-                                       href="#">
+                                       style={{cursor: "pointer"}}
+                                       >
                                         Reviews
                                     </a>
                                 </li>
@@ -74,6 +90,8 @@ function Product({product,onBuy}){
         }
     }
     return renderProduct()
+
+
 }
 
 export default Product;

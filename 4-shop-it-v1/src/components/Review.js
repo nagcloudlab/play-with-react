@@ -5,7 +5,7 @@ function Review({review}) {
             <div className={"alert alert-danger"}>
                 {review.author} - {review.rating}
                 <hr/>
-                {review.review}
+                {review.body}
             </div>
         </div>
     )

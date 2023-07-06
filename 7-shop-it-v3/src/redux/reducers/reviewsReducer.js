@@ -23,6 +23,14 @@ function reviewsReducer(state={},action){
                 [productId]:existingReviews.concat(reviews)
             }
         }
+        case 'ADD_REVIEW_SUCCESS':{
+            let {productId,review}=action
+            let existingReviews=state[productId] || []
+            return {
+             ...state,
+                [productId]:existingReviews.concat(review)
+            }
+        }
         default:
             return state
     }
